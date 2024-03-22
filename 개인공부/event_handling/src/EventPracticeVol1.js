@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class EventPractice extends Component {
+class EventPracticeVol1 extends Component {
   state = {
     message: "", //state에 input 값을 담아준다.
   };
@@ -24,6 +24,7 @@ class EventPractice extends Component {
         />
         <button
           onClick={() => {
+            //입력한 값이 state에 잘 들어갔는지, 그리고 인풋에서 그 값을 제대로 반영한지 검증하기 위해 사용
             alert(this.state.message); //alert를 사용하여 현재 message 값을 화면에 표시
             this.setState({
               message: "",
@@ -37,4 +38,4 @@ class EventPractice extends Component {
   }
 }
 
-export default EventPractice;
+export default EventPracticeVol1;
