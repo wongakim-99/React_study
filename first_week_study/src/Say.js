@@ -20,9 +20,6 @@ const Say = () => {
       <button style={{ color: "blue" }} onClick={() => setColor("blue")}>
         파란색
       </button>
-      <button style={{ color: "black" }} onClick={() => setColor("black")}>
-        검정색
-      </button>
     </div>
   );
 };
