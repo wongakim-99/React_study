@@ -24,10 +24,24 @@
 
 // export default App;
 
-import Info from "./Info";
+import React, { useState } from "react";
+import InfoUseEffectVol4 from "./InfoUseEffectVol4";
 
 const App = () => {
-  return <Info />;
+  const [visible, setVisible] = useState(false);
+  return (
+    <div>
+      <button
+        onClick={() => {
+          setVisible(!visible);
+        }}
+      >
+        {visible ? "숨기기" : "보이기"}
+      </button>
+      <hr />
+      {visible && <InfoUseEffectVol4 />}
+    </div>
+  );
 };
 
 export default App;
