@@ -1,8 +1,8 @@
 /**Event 컴포넌트 렌더링 */
-import Event from "./Event";
+import RewindEvent from "./RewindEvent";
 
 const App = () => {
-  return <Event />;
+  return <RewindEvent />;
 };
 
 export default App;
