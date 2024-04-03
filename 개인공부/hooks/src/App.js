@@ -47,10 +47,10 @@
 // export default App;
 //import CounterUseReducer from "./CounterUseReducer";
 
-import AverageVol2 from "C:/Users/kgw19/OneDrive/바탕 화면/리액트_스터디/React_study/개인공부/hooks/src/AverageVol2";
+import AverageVol3 from "./AverageVol3";
 
 const App = () => {
-  return <AverageVol2 />;
+  return <AverageVol3 />;
 };
 
 export default App;
