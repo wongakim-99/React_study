@@ -47,10 +47,10 @@
 // export default App;
 //import CounterUseReducer from "./CounterUseReducer";
 
-import AverageVol3 from "./AverageVol3";
+import InfoUseEffectVol1 from "./InfoUseEffectVol1";
 
 const App = () => {
-  return <AverageVol3 />;
+  return <InfoUseEffectVol1 />;
 };
 
 export default App;
