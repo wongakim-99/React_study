@@ -47,10 +47,32 @@
 // export default App;
 //import CounterUseReducer from "./CounterUseReducer";
 
-import InfoUseEffectVol1 from "./InfoUseEffectVol1";
+// import InfoUseEffectVol3 from "./InfoUseEffectVol3";
+
+// const App = () => {
+//   return <InfoUseEffectVol3 />;
+// };
+
+// export default App;
+
+import React, { useState } from "react";
+import InfoUseEffectVol4 from "./InfoUseEffectVol4";
 
 const App = () => {
-  return <InfoUseEffectVol1 />;
+  const [visible, setVisible] = useState(false);
+  return (
+    <div>
+      <button
+        onClcik={() => {
+          setVisible(!visible);
+        }}
+      >
+        {visible ? "숨기기" : "보이기"}
+      </button>
+      <hr />
+      {visible && <InfoUseEffectVol4 />}
+    </div>
+  );
 };
 
 export default App;
