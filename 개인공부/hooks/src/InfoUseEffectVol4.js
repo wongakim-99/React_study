@@ -25,8 +25,9 @@ const InfoUseEffectVol4 = () => {
        * 즉, useEffect 훅에서 반환된 함수는 해당효과(effect)이후에 실행되는 뒷정리
        * clean-up작업을 수행하는 역할을 함
        */
+      console.log(name);
     };
-  });
+  }, [name, nickname]);
   const onChangeName = (e) => {
     setName(e.target.value);
   };
@@ -54,3 +55,9 @@ const InfoUseEffectVol4 = () => {
 };
 
 export default InfoUseEffectVol4;
+
+//컴포넌트가 나타날 때 콘솔에 effect가 나타나고, 사라질 때 cleanup 이 나타난다.
+//렌더링 하고 실행시켜보면 렌더링 될 때마다 뒷정리 함수가 계속 나타나는 것을 확인할 수 있다.
+//그리고 뒷정리 함수가 호출될 때는 업데이트되기 직전의 값을 보여준다.
+//오직 언마운트될 때만 뒷정리 함수를 호출하고 싶다면
+//useEffect 함수의 두 번째 파라미터에 비어 있는 배열을 넣어주면 된다.

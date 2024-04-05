@@ -63,7 +63,7 @@ const App = () => {
   return (
     <div>
       <button
-        onClcik={() => {
+        onClick={() => {
           setVisible(!visible);
         }}
       >
