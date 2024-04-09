@@ -1,8 +1,10 @@
 /**Event 컴포넌트 렌더링 */
-import RewindEvent from "./RewindEvent";
+//import IterationSample from "./IterationSample";
+import { RouterProvider } from "react-router-dom";
+import studyRouter from "./router";
 
 const App = () => {
-  return <RewindEvent />;
+  return <RouterProvider router={studyRouter} />;
 };
 
 export default App;

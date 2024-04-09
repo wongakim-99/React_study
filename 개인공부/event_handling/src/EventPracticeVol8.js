@@ -29,7 +29,7 @@ const EventPracticeVol8 = () => {
   };
   return (
     <div>
-      <h1>이벤트 연습</h1>
+      <h1>빡공 고고고고고고고고고고고고고고</h1>
       <input
         type="text"
         name="username"
