@@ -1,39 +1,3 @@
-// import TodoForm from "./TodoForm";
-// import SingleTodo from "./SingleTodo";
-
-// export default function List({
-//   todos,
-//   handleSubmit,
-//   handleClickTodo,
-//   deleteTodo,
-// }) {
-//   const handleClick = (e, id) => {
-//     handleClickTodo(
-//       todos.map((todo) => {
-//         if (todo.id === id) {
-//           todo.completed = !todo.completed;
-//         }
-//         return todo;
-//       })
-//     );
-//   };
-//   return (
-//     <div className="List">
-//       <TodoForm handleSubmit={handleSubmit} />
-//       <ul className="todo-list">
-//         {todos.map((todo) => (
-//           <SingleTodo
-//             todo={todo}
-//             handleClick={handleClick}
-//             deleteTodo={deleteTodo}
-//             key={todo.id}
-//           />
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
-
 /**List 컴포넌트는 새로운 To-do를 작성하는 부분인 TodoForm과 state에 있는
  * 개별 todo들이 SingleTodo가 되어 map으로 그려지는 두 부분으로 나뉘어 있다.
  */

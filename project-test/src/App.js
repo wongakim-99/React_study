@@ -32,7 +32,7 @@ function App() {
   };
   return (
     <div className="App">
-      <h1 id="heading">To-Do List</h1>
+      <h1 id="heading">to-do-list</h1>
       <List
         todos={todos}
         handleSubmit={handleSubmit}
