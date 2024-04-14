@@ -1,6 +1,9 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 // Import the functions you need from the SDKs you need
@@ -14,20 +17,31 @@ import {
   doc,
   deleteDoc,
   getDocs,
+  query,
+  orderBy,
+  where,
 } from "firebase/firestore";
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithRedirect,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDx3dyblA0kIM9UKHbnP6fdnB_Y55FE7rY",
-  authDomain: "todo-list-web-app-ceed0.firebaseapp.com",
-  projectId: "todo-list-web-app-ceed0",
-  storageBucket: "todo-list-web-app-ceed0.appspot.com",
-  messagingSenderId: "536573983103",
-  appId: "1:536573983103:web:d3d5be2469de067eee424a",
-  measurementId: "G-Y4E5XY42SQ",
+  apiKey: "AIzaSyAPjYrRKj11e85Yx1ZaqFiZ6STbH-ciUT8",
+  authDomain: "todo-list-app-98806.firebaseapp.com",
+  projectId: "todo-list-app-98806",
+  storageBucket: "todo-list-app-98806.appspot.com",
+  messagingSenderId: "886143434487",
+  appId: "1:886143434487:web:b5227108bd4261291f9df2",
+  measurementId: "G-NGJKZTHLQN",
 };
 
 // Initialize Firebase
@@ -35,11 +49,13 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
+const provider = new GoogleAuthProvider();
+const auth = getAuth(app);
+
 const TodoItemInputField = (props) => {
   const [input, setInput] = useState("");
 
   const onSubmit = () => {
-    //버튼 눌렀을 때 onSubmit callback 콜 해주기
     props.onSubmit(input);
     setInput("");
   };
@@ -93,41 +109,90 @@ const TodoItemList = (props) => {
   return (
     <div>
       <ul>{todoList}</ul>
-      {/**TodoItemList 콤포넌트 props 로 등록된 Todo 아이템들 받기*/}
     </div>
   );
 };
 
+const TodoListAppBar = (props) => {
+  const loginWithGoogleButton = (
+    <Button
+      color="inherit"
+      onClick={() => {
+        signInWithRedirect(auth, provider);
+      }}
+    >
+      Login with Google
+    </Button>
+  );
+  const logoutButton = (
+    <Button
+      color="inherit"
+      onClick={() => {
+        signOut(auth);
+      }}
+    >
+      Log out
+    </Button>
+  );
+  const button =
+    props.currentUser === null ? loginWithGoogleButton : logoutButton;
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Todo List App
+        </Typography>
+        {button}
+      </Toolbar>
+    </AppBar>
+  );
+};
+
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
   const [todoItemList, setTodoItemList] = useState([]);
 
-  useEffect(() => {
-    getDocs(collection(db, "todoItem")).then((querySnapshot) => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setCurrentUser(user.uid);
+    } else {
+      setCurrentUser(null);
+    }
+  });
+
+  const syncTodoItemListStateWithFirestore = () => {
+    const q = query(
+      collection(db, "todoItem"),
+      where("userId", "==", currentUser),
+      orderBy("createdTime", "desc")
+    );
+
+    getDocs(q).then((querySnapshot) => {
       const firestoreTodoItemList = [];
       querySnapshot.forEach((doc) => {
         firestoreTodoItemList.push({
           id: doc.id,
           todoItemContent: doc.data().todoItemContent,
           isFinished: doc.data().isFinished,
+          createdTime: doc.data().createdTime ?? 0,
+          userId: doc.data().userId,
         });
       });
       setTodoItemList(firestoreTodoItemList);
     });
-  }, []);
+  };
 
+  useEffect(() => {
+    syncTodoItemListStateWithFirestore();
+  }, [currentUser]);
   const onSubmit = async (newTodoItem) => {
-    const docRef = await addDoc(collection(db, "todoItem"), {
+    await addDoc(collection(db, "todoItem"), {
       todoItemContent: newTodoItem,
       isFinished: false,
+      createdTime: Math.floor(Date.now() / 1000),
+      userId: currentUser,
     });
-    setTodoItemList([
-      ...todoItemList,
-      {
-        id: docRef.id,
-        todoItemContent: newTodoItem,
-        isFinished: false,
-      },
-    ]);
+    syncTodoItemListStateWithFirestore();
   };
 
   const onTodoItemClick = async (clickedTodoItem) => {
@@ -137,33 +202,18 @@ function App() {
       { isFinished: !clickedTodoItem.isFinished },
       { merge: true }
     );
-    setTodoItemList(
-      todoItemList.map((todoItem) => {
-        if (clickedTodoItem.id === todoItem.id) {
-          return {
-            id: clickedTodoItem.id,
-            todoItemContent: clickedTodoItem.todoItemContent,
-            isFinished: !clickedTodoItem.isFinished,
-          };
-        } else {
-          return todoItem;
-        }
-      })
-    );
+    syncTodoItemListStateWithFirestore();
   };
 
   const onRemoveClick = async (removedTodoItem) => {
     const todoItemRef = doc(db, "todoItem", removedTodoItem.id);
     await deleteDoc(todoItemRef);
-    setTodoItemList(
-      todoItemList.filter((todoItem) => {
-        return todoItem.id !== removedTodoItem.id;
-      })
-    );
+    syncTodoItemListStateWithFirestore();
   };
 
   return (
     <div className="App">
+      <TodoListAppBar currentUser={currentUser} />
       <TodoItemInputField onSubmit={onSubmit} />
       <TodoItemList
         todoItemList={todoItemList}
