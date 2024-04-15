@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+//import { getAnalytics } from "firebase/analytics";
 import {
   getFirestore,
   collection,
@@ -19,7 +19,6 @@ import {
   getDocs,
   query,
   orderBy,
-  where,
 } from "firebase/firestore";
 import {
   GoogleAuthProvider,
@@ -46,7 +45,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 const provider = new GoogleAuthProvider();
@@ -161,11 +160,7 @@ function App() {
   });
 
   const syncTodoItemListStateWithFirestore = () => {
-    const q = query(
-      collection(db, "todoItem"),
-      where("userId", "==", currentUser),
-      orderBy("createdTime", "desc")
-    );
+    const q = query(collection(db, "todoItem"), orderBy("createdTime", "desc"));
 
     getDocs(q).then((querySnapshot) => {
       const firestoreTodoItemList = [];
@@ -184,7 +179,7 @@ function App() {
 
   useEffect(() => {
     syncTodoItemListStateWithFirestore();
-  }, [currentUser]);
+  }, []);
   const onSubmit = async (newTodoItem) => {
     await addDoc(collection(db, "todoItem"), {
       todoItemContent: newTodoItem,
