@@ -1,52 +1,7 @@
-// import React, { useState } from "react";
-// import InfoUseEffectVol4 from "./InfoUseEffectVol4";
-
-// const App = () => {
-//   const [visible, setVisible] = useState(false);
-//   return (
-//     <div>
-//       <button
-//         onClick={() => {
-//           setVisible(!visible);
-//         }}
-//       >
-//         {visible ? "숨기기" : "보이기"}
-//       </button>
-//       <hr />
-//       {visible && <InfoUseEffectVol4 />}
-//     </div>
-//   );
-// };
-
-//export default App;
-//import CounterUseReducer from "./CounterUseReducer";
-
-import InfoUseReducer from "./InfoUseReducer";
+import Info from "./Info";
 
 const App = () => {
-  return <InfoUseReducer />;
+  return <Info />;
 };
 
 export default App;
-
-// import React, { useState } from "react";
-// import InfoUseEffectVol4 from "./InfoUseEffectVol4";
-
-// const App = () => {
-//   const [visible, setVisible] = useState(false);
-//   return (
-//     <div>
-//       <button
-//         onClick={() => {
-//           setVisible(!visible);
-//         }}
-//       >
-//         {visible ? "숨기기" : "보이기"}
-//       </button>
-//       <hr />
-//       {visible && <InfoUseEffectVol4 />}
-//     </div>
-//   );
-// };
-
-// export default App;
