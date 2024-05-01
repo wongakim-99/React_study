@@ -1,0 +1,13 @@
+{
+  "name": "tmpbackend",
+  "version": "0.0.1",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "start":"node app"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
+}
