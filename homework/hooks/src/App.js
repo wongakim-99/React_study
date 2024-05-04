@@ -20,10 +20,10 @@
 
 // export default App;
 
-import InfouseReducer from "./InfouseReducer";
+import Calculate from "./Calculate";
 
 const App = () => {
-  return <InfouseReducer />;
+  return <Calculate />;
 };
 
 export default App;
