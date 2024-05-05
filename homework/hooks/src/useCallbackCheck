@@ -1,0 +1,98 @@
+[ useMemo ]
+useMemo는 React 컴포넌트에서 계산 비용이 큰 연산을 최적화하는 데 사용되는 Hook입니다.
+useMemo는 이전에 계산된 값을 기억하고, 해당 값이 변경되지 않은 경우에는 이전 값을 재사용합니다. 
+
+즉 , 메모이제이션된 '값'을 반환합니다.
+
+useMemo(() => fn, deps);
+
+useMemo는 deps가 변한다면, () => fn이라는 함수를 실행하고, 그 함수의 반환 값을 반환합니다. 
+deps는 dependency이며, useMemo가 이 deps라는 것에 '의존'한다는 뜻입니다.
+
+
+
+(예시코드)
+import React, { useState, useCallback, useMemo } from "react";
+ 
+export default function App() {
+  const [ex1, setEx1] = useState(0);
+  const [ex2, setEx2] = useState(0);
+ 
+  // useMemo 사용하기
+  useMemo(() => {console.log(ex1)}, [ex1]);
+ 
+  // 두 개의 버튼을 설정하고, X버튼만이 ex1를 변화시킵니다.
+  return (
+    <>
+      <button onClick={() => setEx1((curr1) => (curr1 + 1))}>X</button>
+      <button onClick={() => setEx2((curr2) => (curr2 + 1))}>Y</button>
+    </>
+  );
+}
+
+useMemo(() => {console.log(ex)},[ex])
+ 
+위 코드에서 deps는 [ex]입니다. 즉, ex가 변할 때만 () => {console.log(ex)} 가 실행됩니다. 
+따라서 X 버튼을 누를 때만 콘솔 창에 ex 값이 출력됩니다.  
+여기서 Y 버튼을 누르더라도 APP이라는 함수 컴포넌트가 전부 재실행(리렌더링) 되지만,
+ ex라는 값은 변하지 않기 때문에 useMemo에는 아무런 변화가 없습니다.
+
+
+
+
+
+[ useCallback ] 
+useCallback은 React 컴포넌트에서 함수를 메모이제이션하여 성능을 최적화하는 데 사용되는 Hook입니다.
+useCallback은 이전에 생성된 함수를 기억하고, 해당 함수를 재사용합니다. 
+
+즉 , 메모이제이션된 '함수'를 반환합니다.
+
+useCallback(fn, deps)
+useCallback은 deps가 변한다면 fn이라는 새로운 함수를 반환합니다. 
+
+
+
+(예시코드)
+import React, { useState, useCallback, useMemo } from "react";
+ 
+export default function App() {
+  const [ex1, setEx1] = useState(0);
+  const [ex2, setEx2] = useState(0);
+ 
+  // useCallback이 () => {console.log(ex2)}라는 함수를 반환합니다.
+  const useCallbackReturn = useCallback(() => {console.log(ex2)}, [ex1]);
+ 
+  // useCallback이 담겨있는 함수를 실행
+  useCallbackReturn();
+ 
+  return (
+    <>
+      <button onClick={() => setEx1((curr1) => (curr1 + 1))}>X</button>
+      <button onClick={() => setEx2((curr2) => (curr2 + 1))}>Y</button>
+    </>
+  );
+}
+
+
+위의 코드는 처음 예시와 같은 버튼을 클릭할 때 이벤트가 발생하는 코드입니다.
+위의 useCallback은 () => {console.log(ex2)}라는 함수를 반환해주고 있습니다. 
+
+useCallback은 다음의 순서로 진행됩니다.
+
+1.  처음 컴포넌트가 시작될 때 실행 () => {console.log(0)}
+2.  ex1이 변할 때까지 함수는 () => {console.log(0)}
+3. ex1이 변한다면 그때 ex2의 값을 가져와서 () => {console.log(새로운 값)}
+
+ 
+
+
+[ useMemo vs useCallback ] 
+- useMemo는 계산 비용이 큰 연산의 결과를 메모이제이션하여 재사용하고, useCallback은 함수를 메모이제이션하여 재사용합니다.
+- useMemo는 연산 결과를 반환하고, useCallback은 함수를 반환합니다.
+- useMemo는 값을 메모이제이션하고, useCallback은 함수를 메모이제이션합니다.
+- useMemo는 값을 계산하는 로직을 콜백 함수에 작성하고, useCallback은 함수를 생성하는 로직을 콜백 함수에 작성합니다.
+- useMemo는 계산 비용이 큰 연산을 최적화하는 데 사용됩니다. 예를 들어, 배열이나 객체와 같은 큰 데이터를 가공하거나 복잡한 계산을 수행하는 경우에 사용됩니다.
+- useCallback은 자주 렌더링되는 컴포넌트에서 함수를 최적화하고, 불필요한 함수 재생성을 방지하는 데 사용됩니다. 예를 들어, 자식 컴포넌트에 전달되는 콜백 함수를 최적화하고 싶은 경우에 사용됩니다.
+- 의존성 배열(dependencyArray)을 사용하여 어떤 값이 변경되었을 때에만 메모이제이션된 값이나 함수를 갱신하도록 설정할 수 있습니다. 이를 통해 불필요한 갱신을 방지하고, 성능을 향상할 수 있습니다.
+- useMemo와 useCallback은 렌더링 결과에 영향을 주지 않는 경우에는 불필요한 메모이제이션을 방지하고, 최적화를 위해 사용되어야 합니다.
+- useMemo와 useCallback은 성능 최적화를 위한 강력한 도구로 사용되며, 필요에 따라 적절하게 사용하여 React 애플리케이션의 성능을향상할수 있습니다.

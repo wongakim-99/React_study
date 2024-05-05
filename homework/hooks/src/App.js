@@ -20,10 +20,25 @@
 
 // export default App;
 
-import Calculate from "./Calculate";
+// import Average from "./Average";
+
+// const App = () => {
+//   return <Average />;
+// };
+
+// export default App;
+
+// App.js
+
+import React, { useState } from "react";
+import SmartHome from "./components/SmartHome";
 
 const App = () => {
-  return <Calculate />;
+  return (
+    <div style={{ position: "absolute", top: "50%", left: "50%" }}>
+      <SmartHome />
+    </div>
+  );
 };
 
 export default App;
