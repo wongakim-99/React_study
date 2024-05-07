@@ -30,7 +30,7 @@
 
 // App.js
 
-import React, { useState } from "react";
+import React from "react";
 import SmartHome from "./components/SmartHome";
 
 const App = () => {

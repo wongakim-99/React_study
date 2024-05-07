@@ -2,13 +2,13 @@
 //import IterationSample from "./IterationSample";
 // import { RouterProvider } from "react-router-dom";
 // import studyRouter from "./router";
-import EffectVisible from "./EffectVisible";
+// import EffectVisible from "./EffectVisible";
 
-const App = () => {
-  return <EffectVisible />;
-};
+// const App = () => {
+//   return <EffectVisible />;
+// };
 
-export default App;
+// export default App;
 
 // import React, { useState } from "react";
 
@@ -24,3 +24,16 @@ export default App;
 // };
 
 // export default App;
+
+import React from "react";
+import { RouterProvider } from "react-router-dom";
+
+const App = () => {
+  return (
+    <div>
+      <RouterProvider>router</RouterProvider>
+    </div>
+  );
+};
+
+export default App;
