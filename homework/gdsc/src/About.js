@@ -10,7 +10,7 @@ const About = () => {
     setSearchParams({ mode, detail: detail === "true" ? false : true });
   };
 
-  const onToggleMode = () => {
+  const onIncreaseMode = () => {
     const nextMode = mode === null ? 1 : parseInt(mode) + 1;
     setSearchParams({ mode: nextMode, detail });
   };
@@ -18,11 +18,11 @@ const About = () => {
   return (
     <div>
       소개
-      <p>리액트 소개 페이지</p>
+      <p>리액트 라우터를 사용해보는 프로젝트</p>
       <p>detail : {detail}</p>
       <p>mode : {mode}</p>
       <button onClick={onToggleDetail}>Toggle detail</button>
-      <button onClick={onToggleMode}>mode + 1</button>
+      <button onClick={onIncreaseMode}>mode + 1</button>
     </div>
   );
 };

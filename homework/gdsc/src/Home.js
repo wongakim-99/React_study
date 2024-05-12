@@ -10,7 +10,16 @@ const Home = () => {
         <Link to="/about">소개</Link>
       </li>
       <li>
-        <Link to="/Profile">프로필</Link>
+        <Link to="/Profile/developer1">김가원</Link>
+      </li>
+      <li>
+        <Link to="/Profile/developer2">김승찬</Link>
+      </li>
+      <li>
+        <Link to="/Profile/developer3">존재하지 않는 프로필</Link>
+      </li>
+      <li>
+        <Link to="/articles">게시글</Link>
       </li>
     </div>
   );

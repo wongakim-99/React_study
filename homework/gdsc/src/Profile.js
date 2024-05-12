@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 const data = {
   developer1: {
     name: "김가원",
-    discription: "4학년",
+    discription: "3학년",
   },
   developer2: {
     name: "김승찬",
-    discription: "3학년",
+    discription: "4학년",
   },
 };
 
@@ -22,7 +22,7 @@ const Profile = () => {
       {profile ? (
         <div>
           <h2> {profile.name}</h2>
-          <h2> {profile.discription}</h2>
+          <h3> {profile.discription}</h3>
         </div>
       ) : (
         <p>존재하지 않는 프로필입니다</p>
