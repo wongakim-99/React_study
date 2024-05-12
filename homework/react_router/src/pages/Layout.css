@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: #7fffd4;
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  .header {
+    background: lightgreen;
+    padding: 16px;
+    font-size: 24px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button {
+    padding: 8px 16px;
+    margin: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: none;
+    background: lightblue;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  
