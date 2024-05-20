@@ -13,6 +13,7 @@ const About = () => {
     const nextMode = mode === null ? 1 : parseInt(mode) + 1;
     setSearchParams({ mode: nextMode, detail });
   };
+
   return (
     <div>
       <h1>소개</h1>

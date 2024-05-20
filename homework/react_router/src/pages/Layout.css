@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "KyoboHandwriting2023wsa";
+  font-weight: normal;
+  src: url("../../src/font/KyoboHandwriting2023wsa.ttf") format("truetype");
+}
 .container {
     display: flex;
     flex-direction: column;
@@ -5,7 +10,7 @@
     align-items: center;
     justify-content: center;
     background: #7fffd4;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'KyoboHandwriting2023wsa';
   }
   
   .header {
@@ -27,5 +32,6 @@
     cursor: pointer;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
+    font-family: 'KyoboHandwriting2023wsa';
   }
   
