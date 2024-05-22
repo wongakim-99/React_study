@@ -1,16 +1,46 @@
+.CategoriesBlock {
+    display: flex;
+    padding: 1rem;
+    width: 768px;
+    margin: 0 auto;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      overflow-x: auto;
+    }
+}
+
+.Category.active {
+    font-weight: 600;
+    border-bottom: 2px solid #22b8cf;
+    color :#22b8cf;
+}
+
+.Category.hover {
+    color : #3bc9db;
+}
+
+.Category.nav-link {
+    // 원하는 스타일 지정
+    font-weight: bold;
+    color: #22b8cf;
+    // 추가적인 스타일 적용 가능
+}
+
+//Categories에서 props로 전달받은 onSelect를 각 Category 컴포넌트의 onClick으로 설정해주고,
+//현재 선택된 카테고리 값에 따라 다른 스타일 적용
 .Category {
-    font-size : 1.125rem;
-    cursor : pointer;
+    font-size: 1.125rem;
+    cursor: pointer;
     white-space: pre;
     text-decoration: none;
-    color:inherit;
+    color: inherit;
     padding-bottom: 0.25rem;
-}
-
-&:hover {
-    color : #495057;
-}
-
-& + & {
-    margin-left : 1rem;
+  
+    &:hover {
+      color: #495057;
+    }
+  
+    & + & {
+      margin-left: 1rem;
+    }
 }

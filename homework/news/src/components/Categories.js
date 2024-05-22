@@ -8,6 +8,14 @@
  * 6. technology
  */
 
+// Categories.js 파일
+
+import React from "react";
+import { NavLink } from "react-router-dom"; // NavLink import
+
+import "./Categories.scss"; // SCSS 파일을 import
+import classNames from "classnames";
+
 const categories = [
   {
     name: "all",
@@ -39,13 +47,19 @@ const categories = [
   },
 ];
 
-const Categories = () => {
+const Categories = ({ category, onSelect }) => {
   return (
     <div className="CategoriesBlock">
       {categories.map((c) => (
-        <div className="Categories" key={c.name}>
+        <NavLink
+          key={c.name}
+          to={`/${c.name}`} // NavLink의 링크 설정
+          activeClassName="active" // 활성화된 링크에 적용될 클래스
+          className={classNames("Category")}
+          onClick={() => onSelect(c.name)}
+        >
           {c.text}
-        </div>
+        </NavLink>
       ))}
     </div>
   );
