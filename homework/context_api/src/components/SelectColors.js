@@ -20,8 +20,9 @@ const SelectColors = () => {
                 }}
                 onClick={() => actions.setColor(color)}
                 onContextMenu={(e) => {
+                  //마우스 우클릭시 메뉴버튼 나오는 것을 방지
                   e.preventDefault();
-                  actions.setSubcolor(color);
+                  actions.setSubColor(color);
                 }}
               />
             ))}
