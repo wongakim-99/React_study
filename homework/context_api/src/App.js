@@ -1,22 +1,22 @@
-import React from "react";
-import ColorBox from "./components/ColorBox";
-//import ColorContext from "./contexts/color";
-import { ColorProvider } from "./contexts/color";
-import SelectColors from "./components/SelectColors";
-//import SelectColors from "./components/SelectColors";
+// import React from "react";
+// import ColorBox from "./components/ColorBox";
+// //import ColorContext from "./contexts/color";
+// import { ColorProvider } from "./contexts/color";
+// import SelectColors from "./components/SelectColors";
+// //import SelectColors from "./components/SelectColors";
 
-const App = () => {
-  return (
-    <ColorProvider>
-      <div>
-        <SelectColors />
-        <ColorBox />
-      </div>
-    </ColorProvider>
-  );
-};
+// const App = () => {
+//   return (
+//     <ColorProvider>
+//       <div>
+//         <SelectColors />
+//         <ColorBox />
+//       </div>
+//     </ColorProvider>
+//   );
+// };
 
-export default App;
+// export default App;
 
 // import React, { createContext, useContext } from "react";
 // import "./style.css";
@@ -72,3 +72,16 @@ export default App;
 // export default App;
 
 //Context를 공유하면 전역적으로 상태관리 가능
+
+import React from "./components";
+import Counter from "./components/Counter";
+
+const App = () => {
+  return (
+    <div>
+      <Counter number={0} />
+    </div>
+  );
+};
+
+export default App;
