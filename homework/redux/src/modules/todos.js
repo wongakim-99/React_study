@@ -4,13 +4,14 @@ const INSERT = "todos/INSERT"; //새로운 todo 등록
 const TOGGLE = "todos/TOGGLE"; //todo를 체크/체크 해제
 const REMOVE = "todos/REMOVE"; //todo를 제거
 
-//액션 생성함수 만들기+
+//액션 생성함수 만들기
 export const changeInput = (input) => ({
   type: CHANGE_INPUT,
   input,
 });
 
-let id = 3;
+let id = 1;
+
 export const insert = (text) => ({
   type: INSERT,
   todo: {
@@ -35,18 +36,7 @@ export const remove = (id) => ({
 //배열에 변화를 줄 때는 배열 내장 함수를 사용하여 구현
 const initialState = {
   input: "",
-  todos: [
-    {
-      id: 1,
-      text: "리덕스 기초 배우기",
-      done: true,
-    },
-    {
-      id: 2,
-      text: "리액트와 리덕스 사용하기",
-      done: false,
-    },
-  ],
+  todos: [],
 };
 
 function todos(state = initialState, action) {
