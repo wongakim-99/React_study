@@ -7,9 +7,10 @@ import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
 //import loggerMiddleware from "./lib/loggerMiddleware";
 import { createLogger } from "redux-logger";
+import { thunk as ReduxThunk } from "redux-thunk"; // 여기서 named export로 변경
 
 const logger = createLogger();
-const store = createStore(rootReducer, applyMiddleware(logger));
+const store = createStore(rootReducer, applyMiddleware(logger, ReduxThunk));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
